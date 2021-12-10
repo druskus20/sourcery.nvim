@@ -45,10 +45,10 @@ function M.setup(config)
     git = { change = "#6183bb", add = "#449dab", delete = "#914c54", conflict = "#bb7a61" },
     gitSigns = { add = "#164846", change = "#394b70", delete = "#823c41" },
   }
-  if config.style == "night" or config.style == "day" or vim.o.background == "light" then
-    colors.bg = "#1a1b26"
-    colors.bg_dark = "#16161e"
-  end
+  --if config.style == "night" or config.style == "day" or vim.o.background == "light" then
+  --  colors.bg = "#1a1b26"
+  --  colors.bg_dark = "#16161e"
+  --end
   util.bg = colors.bg
 
   colors.diff = {

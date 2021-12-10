@@ -73,9 +73,9 @@ function util.highlight(group, color)
   end
 
   local style = color.style and "gui=" .. color.style or "gui=NONE"
-  local fg = color.fg and "guifg=" .. util.getColor(color.fg) or "guifg=NONE"
-  local bg = color.bg and "guibg=" .. util.getColor(color.bg) or "guibg=NONE"
-  local sp = color.sp and "guisp=" .. util.getColor(color.sp) or ""
+  local fg = color.fg and "guifg=" .. color.fg or "guifg=NONE"
+  local bg = color.bg and "guibg=" .. color.bg or "guibg=NONE"
+  local sp = color.sp and "guisp=" .. color.sp or ""
 
   local hl = "highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp
 
@@ -171,20 +171,9 @@ function util.terminal(colors)
 
   if vim.o.background == "light" then
     for i = 0, 15, 1 do
-      vim.g["terminal_color_" .. i] = util.getColor(vim.g["terminal_color_" .. i])
+      vim.g["terminal_color_" .. i] = vim.g["terminal_color_" .. i]
     end
   end
-end
-
-function util.light_colors(colors)
-  if type(colors) == "string" then
-    return util.getColor(colors)
-  end
-  local ret = {}
-  for key, value in pairs(colors) do
-    ret[key] = util.light_colors(value)
-  end
-  return ret
 end
 
 ---@param theme Theme
