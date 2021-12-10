@@ -51,14 +51,14 @@ function util.brighten(color, percentage)
   return hsluv.hsluv_to_hex(hsl)
 end
 
-function util.randomColor(color)
-  if color ~= "NONE" then
-    local hsl = hsluv.hex_to_hsluv(color)
-    hsl[1] = math.random(1, 360)
-    return hsluv.hsluv_to_hex(hsl)
-  end
-  return color
-end
+--function util.randomColor(color)
+--  if color ~= "NONE" then
+--    local hsl = hsluv.hex_to_hsluv(color)
+--    hsl[1] = math.random(1, 360)
+--    return hsluv.hsluv_to_hex(hsl)
+--  end
+--  return color
+--end
 
 -- local ns = vim.api.nvim_create_namespace("sourcery")
 function util.highlight(group, color)

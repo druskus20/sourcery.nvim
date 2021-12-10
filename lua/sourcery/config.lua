@@ -17,19 +17,14 @@ end
 
 config = {
   transparent = opt("transparent", false),
-
   commentStyle = opt("italic_comments", true) and "italic" or "NONE",
   keywordStyle = opt("italic_keywords", false) and "italic" or "NONE",
   functionStyle = opt("italic_functions", false) and "italic" or "NONE",
   variableStyle = opt("italic_variables", false) and "italic" or "NONE",
-
-  --terminalColors = opt("terminal_colors", true),
   colors = opt("colors", {}),
   darkFloat = opt("dark_float", true),
   darkSidebar = opt("dark_sidebar", true),
   transparentSidebar = opt("transparent_sidebar", false),
-  --lualineBold = opt("lualine_bold", false),
 }
-
 
 return config
