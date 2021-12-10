@@ -7,7 +7,6 @@ util.colorCache = {}
 
 util.bg = "#000000"
 util.fg = "#ffffff"
-util.day_brightness = 0.3
 
 local function hexToRgb(hex_str)
   local hex = "[abcdef0-9][abcdef0-9]"
@@ -52,18 +51,6 @@ function util.brighten(color, percentage)
   return hsluv.hsluv_to_hex(hsl)
 end
 
-function util.invertColor(color)
-  if color ~= "NONE" then
-    local hsl = hsluv.hex_to_hsluv(color)
-    hsl[3] = 100 - hsl[3]
-    if hsl[3] < 40 then
-      hsl[3] = hsl[3] + (100 - hsl[3]) * util.day_brightness
-    end
-    return hsluv.hsluv_to_hex(hsl)
-  end
-  return color
-end
-
 function util.randomColor(color)
   if color ~= "NONE" then
     local hsl = hsluv.hex_to_hsluv(color)
@@ -71,16 +58,6 @@ function util.randomColor(color)
     return hsluv.hsluv_to_hex(hsl)
   end
   return color
-end
-
-function util.getColor(color)
-  if vim.o.background == "dark" then
-    return color
-  end
-  if not util.colorCache[color] then
-    util.colorCache[color] = util.invertColor(color)
-  end
-  return util.colorCache[color]
 end
 
 -- local ns = vim.api.nvim_create_namespace("sourcery")
@@ -142,16 +119,6 @@ function util.autocmds(config)
   vim.cmd([[augroup Sourcery]])
   vim.cmd([[  autocmd!]])
   vim.cmd([[  autocmd ColorScheme * lua require("sourcery.util").onColorScheme()]])
-  if config.dev then
-    vim.cmd([[  autocmd BufWritePost */lua/sourcery/** nested colorscheme sourcery]])
-  end
-  for _, sidebar in ipairs(config.sidebars) do
-    if sidebar == "terminal" then
-      vim.cmd([[  autocmd TermOpen * setlocal winhighlight=Normal:NormalSB,SignColumn:SignColumnSB]])
-    else
-      vim.cmd([[  autocmd FileType ]] .. sidebar .. [[ setlocal winhighlight=Normal:NormalSB,SignColumn:SignColumnSB]])
-    end
-  end
   vim.cmd([[augroup end]])
 end
 
@@ -281,11 +248,10 @@ function util.light(brightness)
     for key, def_key in pairs({ foreground = "fg", background = "bg", special = "sp" }) do
       if type(hl[key]) == "number" then
         local hex = string.format("#%06x", hl[key])
-        local color = util.invertColor(hex)
         if brightness then
-          color = util.brighten(hex, brightness)
+          hex = util.brighten(hex, brightness)
         end
-        table.insert(def, "gui" .. def_key .. "=" .. color)
+        table.insert(def, "gui" .. def_key .. "=" .. hex)
       end
     end
     if hl_name ~= "" and #def > 0 then

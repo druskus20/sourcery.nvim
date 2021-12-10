@@ -16,7 +16,6 @@ A colorscheme
 - [Indent Blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [Dashboard](https://github.com/glepnir/dashboard-nvim)
 - [BufferLine](https://github.com/akinsho/nvim-bufferline.lua)
-- [Lualine](https://github.com/hoob3rt/lualine.nvim)
 - [Lightline](https://github.com/itchyny/lightline.vim)
 - [Neogit](https://github.com/TimUntersberger/neogit)
 - [vim-sneak](https://github.com/justinmk/vim-sneak)
@@ -74,60 +73,5 @@ To enable the `sourcery` colorscheme for `Lightline`:
 ```vim
 " Vim Script
 let g:lightline = {'colorscheme': 'sourcery'}
-```
-
-## ⚙️ Configuration
-
-> ❗️ configuration needs to be set **BEFORE** loading the color scheme with `colorscheme sourcery`
-
-The theme comes in three styles, `storm`, a darker variant `night` and `day`.
-
-The **day** style will be used if:
-
-- `vim.g.sourcery_style == "day"`
-- or `vim.o.background == "light"`
-
-| Option                              | Default   | Description                                                                                                                                                     |
-| ----------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| sourcery_terminal_colors          | `true`    | Configure the colors used when opening a `:terminal` in Neovim                                                                                                  |
-| sourcery_italic_comments          | `true`    | Make comments italic                                                                                                                                            |
-| sourcery_italic_keywords          | `true`    | Make keywords italic                                                                                                                                            |
-| sourcery_italic_functions         | `false`   | Make functions italic                                                                                                                                           |
-| sourcery_italic_variables         | `false`   | Make variables and identifiers italic                                                                                                                           |
-| sourcery_transparent              | `false`   | Enable this to disable setting the background color                                                                                                             |
-| sourcery_hide_inactive_statusline | `false`   | Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**. |
-| sourcery_sidebars                 | `{}`      | Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`                                                      |
-| sourcery_transparent_sidebar      | `false`   | Sidebar like windows like `NvimTree` get a transparent background                                                                                               |
-| sourcery_dark_sidebar             | `true`    | Sidebar like windows like `NvimTree` get a darker background                                                                                                    |
-| sourcery_dark_float               | `true`    | Float windows like the lsp diagnostics windows get a darker background.                                                                                         |
-| sourcery_colors                   | `{}`      | You can override specific color groups to use other groups or a hex color                                                                                       |
-| sourcery_lualine_bold             | `false`   | When `true`, section headers in the lualine theme will be bold                                                                                                  |
-
-```lua
--- Example config in Lua
-vim.g.sourcery_italic_functions = true
-vim.g.sourcery_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-
--- Change the "hint" color to the "orange" color, and make the "error" color bright red
-vim.g.sourcery_colors = { hint = "orange", error = "#ff0000" }
-
--- Load the colorscheme
-vim.cmd[[colorscheme sourcery]]
-```
-
-```vim
-" Example config in VimScript
-let g:sourcery_style = "night"
-let g:sourcery_italic_functions = 1
-let g:sourcery_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-
-" Change the "hint" color to the "orange" color, and make the "error" color bright red
-let g:sourcery_colors = {
-  \ 'hint': 'orange',
-  \ 'error': '#ff0000'
-\ }
-
-" Load the colorscheme
-colorscheme sourcery
 ```
 

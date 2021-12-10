@@ -448,18 +448,6 @@ function M.setup(config)
 
   theme.defer = {}
 
-  if config.hideInactiveStatusline then
-    local inactive = { style = "underline", bg = c.bg, fg = c.bg, sp = c.border }
-
-    -- StatusLineNC
-    theme.base.StatusLineNC = inactive
-
-    -- LuaLine
-    for _, section in ipairs({ "a", "b", "c" }) do
-      theme.defer["lualine_" .. section .. "_inactive"] = inactive
-    end
-  end
-
   return theme
 end
 

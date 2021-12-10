@@ -50,7 +50,6 @@ function M.setup(config)
     colors.bg_dark = "#16161e"
   end
   util.bg = colors.bg
-  util.day_brightness = config.dayBrightness
 
   colors.diff = {
     add = util.darken(colors.green2, 0.15),
@@ -88,10 +87,6 @@ function M.setup(config)
   colors.hint = colors.teal
 
   util.color_overrides(colors, config)
-
-  if config.transform_colors and (config.style == "day" or vim.o.background == "light") then
-    return util.light_colors(colors)
-  end
 
   return colors
 end
