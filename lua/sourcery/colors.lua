@@ -1,11 +1,11 @@
-local util = require("tokyonight.util")
+local util = require("sourcery.util")
 
 local M = {}
 
 ---@param config Config
 ---@return ColorScheme
 function M.setup(config)
-  config = config or require("tokyonight.config")
+  config = config or require("sourcery.config")
 
   -- Color Palette
   ---@class ColorScheme

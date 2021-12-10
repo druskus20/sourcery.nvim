@@ -1,4 +1,4 @@
-local hsluv = require("tokyonight.hsluv")
+local hsluv = require("sourcery.hsluv")
 
 local util = {}
 
@@ -83,7 +83,7 @@ function util.getColor(color)
   return util.colorCache[color]
 end
 
--- local ns = vim.api.nvim_create_namespace("tokyonight")
+-- local ns = vim.api.nvim_create_namespace("sourcery")
 function util.highlight(group, color)
   if color.fg then
     util.colorsUsed[color.fg] = true
@@ -116,7 +116,7 @@ function util.highlight(group, color)
 end
 
 function util.debug(colors)
-  colors = colors or require("tokyonight.colors")
+  colors = colors or require("sourcery.colors")
   -- Dump unused colors
   for name, color in pairs(colors) do
     if type(color) == "table" then
@@ -131,19 +131,19 @@ end
 
 --- Delete the autocmds when the theme changes to something else
 function util.onColorScheme()
-  if vim.g.colors_name ~= "tokyonight" then
-    vim.cmd([[autocmd! TokyoNight]])
-    vim.cmd([[augroup! TokyoNight]])
+  if vim.g.colors_name ~= "sourcery" then
+    vim.cmd([[autocmd! Sourcery]])
+    vim.cmd([[augroup! Sourcery]])
   end
 end
 
 ---@param config Config
 function util.autocmds(config)
-  vim.cmd([[augroup TokyoNight]])
+  vim.cmd([[augroup Sourcery]])
   vim.cmd([[  autocmd!]])
-  vim.cmd([[  autocmd ColorScheme * lua require("tokyonight.util").onColorScheme()]])
+  vim.cmd([[  autocmd ColorScheme * lua require("sourcery.util").onColorScheme()]])
   if config.dev then
-    vim.cmd([[  autocmd BufWritePost */lua/tokyonight/** nested colorscheme tokyonight]])
+    vim.cmd([[  autocmd BufWritePost */lua/sourcery/** nested colorscheme sourcery]])
   end
   for _, sidebar in ipairs(config.sidebars) do
     if sidebar == "terminal" then
@@ -231,7 +231,7 @@ function util.load(theme)
   -- end
 
   vim.o.termguicolors = true
-  vim.g.colors_name = "tokyonight"
+  vim.g.colors_name = "sourcery"
   -- vim.api.nvim__set_hl_ns(ns)
   -- load base theme
   util.syntax(theme.base)
